@@ -1,5 +1,5 @@
 ## Management System
-This project for client management system. 
+This project is for client management system. 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
