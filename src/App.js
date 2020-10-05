@@ -1,7 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import Table from '@material-ui/core/Table';
+import Paper from '@material-ui/core/Paper';
+import TableHead from '@material-ui/core/TableHead';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import TableBody from '@material-ui/core/TableBody';
 import Customer from './Components/Customer';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = theme => ({
+  root:{
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: "auto"
+  },
+  table: {
+    minWidth: 1080
+  }
+})
 
 const customers = [
 {
@@ -29,26 +46,44 @@ const customers = [
   'job': 'doctor'
 }
 ]
-function App() {
-  return (
-    <div>
-      {
-        customers.map(c => {
-          return (
-            <Customer
-              key = {c.id}
-              id = {c.id}
-              image = {c.image}
-              name = {c.name}
-              gender = {c.gender}
-              job = {c.job}
-              birthday = {c.birthday}
-            />
-          );
-        })
-      }
-    </div>
-  );
+
+class App extends Component {
+  render(){
+    const {classes} = this.props;
+    return (
+      <Paper className = {classes.root}> 
+        <Table className = {classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Image</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Birthday</TableCell>
+              <TableCell>Gender</TableCell>
+              <TableCell>Job</TableCell>
+            </TableRow>
+          </TableHead>
+        <TableBody>
+        {
+          customers.map(c => {
+            return (
+              <Customer
+                key = {c.id}
+                id = {c.id}
+                image = {c.image}
+                name = {c.name}
+                gender = {c.gender}
+                job = {c.job}
+                birthday = {c.birthday}
+              />
+            );
+          })
+        }
+        </TableBody>
+        </Table>
+      </Paper>
+    );
+  }
 }
 
-export default App;
+export default withStyles(styles)(App);
